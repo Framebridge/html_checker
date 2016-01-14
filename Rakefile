@@ -21,6 +21,9 @@ task :test do
   HTML::Proofer.new(
     './www.theironyard.com',
     check_html: false,
+    allow_hash_href: true,
+    empty_alt_ignore: true,
+    typhoeus: { verbose: true, timeout: 5 },
     parallel: { in_processes: HWSystem.processor_count }
   ).run
 end
