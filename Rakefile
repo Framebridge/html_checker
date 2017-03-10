@@ -1,9 +1,14 @@
-require 'html/proofer'
-require './ext/hw_system'
+require "pry"
+
+require "bundler/setup"
+require "html/proofer"
+require 'uri'
+require "./ext/hw_system"
 
 task :download do
-  domain = 'theironyard.com'
-  site_root = 'https://www.theironyard.com/'
+
+  domain = URI(ENV["URL"]).hostname
+  site_root = ENV["URL"]
 
   `wget \
      --recursive \
@@ -12,14 +17,16 @@ task :download do
      --html-extension \
      --convert-links \
      --restrict-file-names=windows \
+     --directory-prefix=./tmp/sites \
      --domains #{domain} \
      --no-parent \
          #{site_root}`
 end
 
 task :test do
+  domain = URI(ENV["URL"]).hostname
   HTML::Proofer.new(
-    './www.theironyard.com',
+    "./tmp/sites/#{domain}",
     check_html: false,
     allow_hash_href: true,
     empty_alt_ignore: true,
