@@ -1,5 +1,6 @@
 test:
   image: 18fgsa/html-proofer:gitlab-ci
   script:
+    - apt install -y wget
     - bundle
     - rake
