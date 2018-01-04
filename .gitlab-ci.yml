@@ -1,4 +1,5 @@
 test:
   image: 18fgsa/html-proofer:gitlab-ci
   script:
+    - bundle
     - rake
