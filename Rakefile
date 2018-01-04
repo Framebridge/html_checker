@@ -1,7 +1,7 @@
 require "pry"
 
 require "bundler/setup"
-require "html/proofer"
+require "html-proofer"
 require 'uri'
 require "./ext/hw_system"
 
@@ -25,12 +25,14 @@ end
 
 task :test do
   domain = URI(ENV["URL"]).hostname
-  HTML::Proofer.new(
+  HTMLProofer.check_directory(
     "./tmp/sites/#{domain}",
     check_html: false,
     allow_hash_href: true,
+    check_external_hash: true,
     empty_alt_ignore: true,
-    typhoeus: { verbose: true, timeout: 5 },
+    internal_domains: [domain],
+    typhoeus: { verbose: false, timeout: 5 },
     parallel: { in_processes: HWSystem.processor_count }
   ).run
 end

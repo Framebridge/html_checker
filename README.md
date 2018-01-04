@@ -11,7 +11,7 @@ Using wget to clone a hosted website locally, once it has been brought down, run
 
 1. Clone this repo
 2. ```bundle install```
-4. ```URL="https://www.theironyard.com" bundle exec rake ``` # run tests without redownloading site
+4. ```URL="https://www.framebridge.com" bundle exec rake ```
 
 ## TODO
 
